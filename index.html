@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <title>Markdown to slide</title>
+
+    <link rel="stylesheet" href="./bundle/reveal.css" />
+    <link rel="stylesheet" href="./bundle/theme/night.css" id="theme" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://uicdn.toast.com/editor/latest/theme/toastui-editor-dark.css"
+    />
+    <link rel="stylesheet" href="./bundle/plugin/monokai.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <div id="editor"></div>
+    <button id="create-btn" class="create-btn">create!</button>
+    <div class="reveal"></div>
+
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <script src="./bundle/reveal.js"></script>
+    <script src="./bundle/plugin/markdown.js"></script>
+    <script src="./bundle/plugin/highlight.js"></script>
+    <script src="./bundle/plugin/notes.js"></script>
+    <script>
+      const app = document.getElementById("app");
+      const markdownSection = document.querySelector("#markdown-section");
+      const createBtn = document.querySelector("#create-btn");
+      const editorEl = document.querySelector("#editor");
+      const reveal = document.querySelector(".reveal");
+
+      const editor = new toastui.Editor({
+        el: editorEl,
+        previewStyle: "vertical",
+        height: "500px",
+        hideModeSwitch: true,
+        theme: "dark",
+        initialValue: "",
+      });
+
+      function resetSlideScrolling(slide) {
+        slide.classList.remove("scrollable-slide");
+      }
+
+      function handleSlideScrolling(slide) {
+        if (slide.scrollHeight >= 700) {
+          slide.classList.add("scrollable-slide");
+        }
+      }
+
+      Reveal.addEventListener("ready", (event) => {
+        handleSlideScrolling(event.currentSlide);
+      });
+
+      Reveal.addEventListener("slidechanged", (event) => {
+        if (event.previousSlide) {
+          resetSlideScrolling(event.previousSlide);
+        }
+        handleSlideScrolling(event.currentSlide);
+      });
+
+      createBtn.addEventListener("click", () => {
+        const content = editor.getMarkdown();
+
+        if (content.length) {
+          reveal.innerHTML = `
+          <div class="slides">
+            <section data-markdown id="markdown-section">${content}</section>
+          </div>
+          `;
+
+          Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+          }).then(() => {
+            Reveal.addKeyBinding({ keyCode: 40, key: "ArrowDown" }, () => {
+              console.log("down");
+            });
+            Reveal.addKeyBinding({ keyCode: 38, key: "ArrowUp" }, () => {
+              console.log("up");
+            });
+            Reveal.slide(0);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
