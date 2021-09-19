@@ -5,12 +5,18 @@ body {
   overflow-y: scroll !important;
 }
 .create-btn {
-  border: 1px solid #ccc;
-  padding: 5px 10px;
+  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid rgba(0, 0, 0, 0.87);
+  padding: 9px 16px;
   cursor: pointer;
   float: right;
+  background-color: rgb(144, 202, 249);
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 10px 0;
 }
 .create-btn:hover {
+  background-color: rgb(66, 165, 245);
 }
 .scrollable-slide {
   height: 700px;
