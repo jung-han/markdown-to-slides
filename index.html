@@ -17,14 +17,27 @@
   </head>
 
   <body>
+    <div id="manual-area">
+      <button id="manual-close-btn">❌</button>
+      <div>
+        마크다운 기반<br />
+        "만들기!"버튼을 눌러 생성<br />
+        "---"로 페이지를 구분<br />
+        🌞는 밝은 모드, 🌛는 다크 모드<br />
+        연락은 <a href="https://github.com/jung-han/markdown-to-slides">여기로</a><br />
+      </div>
+    </div>
     <div class="container">
       <div class="controls">
-        <button id="white">🌞</button>
-        <button id="night">🌛</button>
+        <a href="#" id="manual-open-btn">설명서</a>
+        <div class="theme-btn-area">
+          <button id="white">🌞</button>
+          <button id="night">🌛</button>
+        </div>
       </div>
 
       <div id="editor"></div>
-      <button id="create-btn" class="create-btn">create!</button>
+      <button id="create-btn" class="create-btn">만들기!</button>
     </div>
     <div class="reveal"></div>
 
@@ -39,6 +52,13 @@
       const createBtn = document.querySelector("#create-btn");
       const editorEl = document.querySelector("#editor");
       const reveal = document.querySelector(".reveal");
+      const initialValue = `# 안녕하세요! 👋
+      
+---
+
+만들기 버튼을 누른 뒤 스크롤을 내려보세요!
+
+      `;
 
       const editor = new toastui.Editor({
         el: editorEl,
@@ -46,7 +66,7 @@
         height: "500px",
         hideModeSwitch: true,
         theme: "dark",
-        initialValue: "",
+        initialValue,
       });
 
       function resetSlideScrolling(slide) {
@@ -116,13 +136,25 @@
         }
       }
 
-      const controls = document.querySelector(".controls");
+      const controls = document.querySelector(".theme-btn-area");
       controls.addEventListener("click", (ev) => {
         const theme = ev.target.id;
         toggleToastUIEditorTheme(theme);
         toggleBodyColor(theme);
 
         document.getElementById("theme").setAttribute("href", `./bundle/theme/${theme}.css`);
+      });
+
+      const manualArea = document.querySelector("#manual-area");
+      const manualOpenBtn = document.querySelector("#manual-open-btn");
+      const manualCloseBtn = document.querySelector("#manual-close-btn");
+      manualOpenBtn.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        manualArea.style.display = "block";
+        console.log(manualArea);
+      });
+      manualCloseBtn.addEventListener("click", (ev) => {
+        manualArea.style.display = "none";
       });
     </script>
   </body>

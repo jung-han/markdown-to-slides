@@ -7,7 +7,8 @@ body {
 .controls {
   margin: 10px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 }
 .controls button {
   font-size: 24px;
@@ -47,4 +48,28 @@ body {
 }
 .container {
   padding: 20px;
+}
+#manual-area {
+  display: none;
+  position: absolute;
+  top: 20%;
+  z-index: 100;
+  background: #00ffff8c;
+  color: black;
+  width: 40%;
+  left: 30%;
+  text-align: center;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+#manual-area button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
