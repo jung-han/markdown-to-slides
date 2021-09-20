@@ -4,6 +4,17 @@ body {
   color: #fff;
   overflow-y: scroll !important;
 }
+.controls {
+  margin: 10px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.controls button {
+  font-size: 24px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
 .create-btn {
   color: rgba(0, 0, 0, 0.87);
   border: 1px solid rgba(0, 0, 0, 0.87);
@@ -33,4 +44,7 @@ body {
 }
 .slides::-webkit-scrollbar-corner {
   background-color: #333;
+}
+.container {
+  padding: 20px;
 }

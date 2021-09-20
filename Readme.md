@@ -8,5 +8,5 @@
 
 ### TODO
 
-- [ ] More Theme
+- [x] More Theme
 - [ ] Keyboard up down arrow scroll

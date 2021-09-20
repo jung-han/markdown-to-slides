@@ -13,11 +13,19 @@
     />
     <link rel="stylesheet" href="./bundle/plugin/monokai.css" />
     <link rel="stylesheet" href="./style.css" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
   </head>
 
   <body>
-    <div id="editor"></div>
-    <button id="create-btn" class="create-btn">create!</button>
+    <div class="container">
+      <div class="controls">
+        <button id="white">🌞</button>
+        <button id="night">🌛</button>
+      </div>
+
+      <div id="editor"></div>
+      <button id="create-btn" class="create-btn">create!</button>
+    </div>
     <div class="reveal"></div>
 
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
@@ -89,6 +97,32 @@
             Reveal.slide(0);
           });
         }
+      });
+
+      function toggleBodyColor(theme) {
+        let color = "#121212";
+        if (theme === "white") {
+          color = "#fff";
+        }
+        document.body.style.backgroundColor = color;
+      }
+
+      function toggleToastUIEditorTheme(theme) {
+        let el = document.getElementsByClassName("toastui-editor-defaultUI")[0];
+        if (theme === "white") {
+          el.classList.remove("toastui-editor-dark");
+        } else {
+          el.classList.add("toastui-editor-dark");
+        }
+      }
+
+      const controls = document.querySelector(".controls");
+      controls.addEventListener("click", (ev) => {
+        const theme = ev.target.id;
+        toggleToastUIEditorTheme(theme);
+        toggleBodyColor(theme);
+
+        document.getElementById("theme").setAttribute("href", `./bundle/theme/${theme}.css`);
       });
     </script>
   </body>
